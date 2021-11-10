@@ -1,0 +1,26 @@
+[
+  {
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "email": "felipot@gmail.nz",
+    "first_name": "Felipe",
+    "last_name": "Bucherenick",
+    "birth_date": "2021-11-10",
+    "password": "holasoyfelipereg"
+  },
+  {
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "email": "remix@gmail.nz",
+    "first_name": "Andrea",
+    "last_name": "Remix",
+    "birth_date": "2021-11-10",
+    "password": "holasoyremix"
+  },
+  {
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "email": "funny@gmail.nz",
+    "first_name": "Choro",
+    "last_name": "Funny",
+    "birth_date": "2021-11-10",
+    "password": "holasoyelchorofunny"
+  }
+]
