@@ -118,9 +118,28 @@ def signup(user: UserRegister = Body(...)):
     summary="Login a User",
     tags=["Users"]
 )
-def login():
-    pass
-
+def login(user_login: UserLogin = Body(...)):
+    """
+    # Login
+    ## This path operation login a user  
+    ### Parameters:  
+      - #### Request Body:  
+          - **user:** *UserLogin*  
+    ### Returns a JSON with the basic user information:  
+      - **user_id:** *UUID*  
+      - **email:** *EmailStr*  
+      - **first_name:** *str*  
+      - **last_name:** *str*  
+      - **birth_date:** *Optional[date]*            
+    """
+    with open('users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        users_list = list(results)
+        user_login_dict = user_login.dict()
+        for user in users_list:
+            if user_login_dict['email'] == user['email']:
+                if user_login_dict['password'] == user['password']:
+                    return user
 
 # Show all users
 
