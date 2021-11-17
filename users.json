@@ -1,6 +1,6 @@
 [
   {
-    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa1",
     "email": "felipot@gmail.nz",
     "first_name": "Felipe",
     "last_name": "Bucherenick",
@@ -8,7 +8,7 @@
     "password": "holasoyfelipereg"
   },
   {
-    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa2",
     "email": "remix@gmail.nz",
     "first_name": "Andrea",
     "last_name": "Remix",
@@ -16,11 +16,19 @@
     "password": "holasoyremix"
   },
   {
-    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa3",
     "email": "funny@gmail.nz",
     "first_name": "Choro",
     "last_name": "Funny",
     "birth_date": "2021-11-10",
     "password": "holasoyelchorofunny"
+  },
+  {
+    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa4",
+    "email": "jamaica@gmail.nz",
+    "first_name": "Ron",
+    "last_name": "Jamaica",
+    "birth_date": "2021-11-17",
+    "password": "todopasando"
   }
 ]

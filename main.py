@@ -179,8 +179,27 @@ def show_all_users():
     summary="Show a User",
     tags=["Users"]
 )
-def show_a_user():
-    pass
+def show_a_user(user_id: UUID = Field(...)):
+    """
+    # Show a user  
+    ## This path operation shows a user in the app.  
+    ### Parameters:  
+      - #### Path parameter:  
+          - **user_id:** *UUID*  
+    ### Returns a JSON with the basic user information:  
+      - **user_id:** *UUID*  
+      - **email:** *EmailStr*  
+      - **first_name:** *str*  
+      - **last_name:** *str*  
+      - **birth_date:** *Optional[date]*            
+    """
+    with open('users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        users_list = list(results)
+        for user in users_list:
+            if user['user_id'] == str(user_id):
+                return user
+
 
 # Delete a user
 
