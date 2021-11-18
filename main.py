@@ -303,8 +303,26 @@ def post(tweet: Tweet = Body(...)):
     summary="Show a tweet",
     tags=["Tweets"]
 )
-def show_a_tweet():
-    pass
+def show_a_tweet(tweet_id: UUID = Field(...)):
+    """
+    ### Show a tweet  
+    ## This path operation show a tweet.
+    ### Parameters:  
+      - #### Path parameter:  
+        - **tweet_id**: *UUID*
+    ### Returns a JSON with a tweet information with the next structure:  
+      - **tweet_id**: *UUID*  
+      - **content**: *str*  
+      - **created_at**: *datetime*  
+      - **updated_at**: *Optional[datetime]*
+      - **by**: *User*     
+     """
+    with open('tweets.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        tweets_list = list(results)
+        for tweet in tweets_list:
+            if tweet['tweet_id'] == str(tweet_id):
+                return tweet
 
 # Delete a tweet
 
