@@ -334,8 +334,33 @@ def show_a_tweet(tweet_id: UUID = Field(...)):
     summary="Delete a tweet",
     tags=["Tweets"]
 )
-def delete_a_tweet():
-    pass
+def delete_a_tweet(tweet_id: UUID = Field(...)):
+    """
+    ### Delete a tweet  
+    ## This path operation delete a tweet.
+    ### Parameters:  
+      - #### Path parameter:  
+        - **tweet_id**: *UUID*
+    ### Returns a JSON with a deleted tweet information with the next structure:  
+      - **tweet_id**: *UUID*  
+      - **content**: *str*  
+      - **created_at**: *datetime*  
+      - **updated_at**: *Optional[datetime]*
+      - **by**: *User*     
+     """
+    with open('tweets.json', 'r+', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        f.close()
+    tweets_list = list(results)
+    for tweet in tweets_list:
+        if tweet['tweet_id'] == str(tweet_id):
+            tweet_index = tweets_list.index(tweet)
+    removed_tweet = tweets_list.pop(tweet_index)
+    new_results = str(tweets_list)
+    with open('tweets.json', 'w', encoding='utf-8') as f:
+        f.write(new_results)
+    return removed_tweet
+
 
 # Update a tweet
 
