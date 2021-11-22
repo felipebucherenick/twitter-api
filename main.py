@@ -211,8 +211,32 @@ def show_a_user(user_id: UUID = Field(...)):
     summary="Delete a User",
     tags=["Users"]
 )
-def delete_a_user():
-    pass
+def delete_a_user(user_id: UUID = Field(...)):
+    """
+    # Delete a user  
+    ## This path operation delete a user in the app.  
+    ### Parameters:  
+       - #### Path parameter:  
+          - **user_id**: *UUID*  
+    ### Returns a JSON with a delete user information with the next structure:  
+       - **user_id:** *UUID*  
+       - **email:** *EmailStr*  
+       - **first_name:** *str*  
+       - **last_name:** *str*  
+       - **birth_date:** *Optional[date]*         
+     """
+
+    with open('users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        users_list = list(results)
+        f.close()
+    for user in users_list:
+        if user['user_id'] == str(user_id):
+            user_index = users_list.index(user)
+            deleted_user = users_list.pop(user_index)
+    with open('users.json', 'w', encoding='utf-8') as f:
+        f.write(str(users_list))
+    return deleted_user
 
 # Update a user
 
