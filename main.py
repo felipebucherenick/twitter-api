@@ -413,5 +413,35 @@ def delete_a_tweet(tweet_id: UUID = Field(...)):
     summary="Update a tweet",
     tags=["Tweets"]
 )
-def update_a_tweet():
-    pass
+def update_a_tweet(tweet: Tweet = Body(...)):
+    """
+    # Update a tweet
+    ## This path operation update a tweet in the app.  
+    ### Parameters:  
+       - #### Request Body:
+          - **tweet**: *Tweet*  
+    ### Return a JSON with the original Tweet info. and a second with the updated info with the next structure:  
+       - **tweet_id**: *UUID*  
+       - **content**: *str*  
+       - **created_at**: *datetime*  
+       - **updated_at**: *Optional[datetime]*
+       - **by**: *User*          
+     """
+    with open('tweets.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        tweets_list = list(results)
+        f.close()
+        tweet_dict = tweet.dict()
+        tweet_dict['tweet_id'] = str(tweet_dict['tweet_id'])
+        tweet_dict['created_at'] = str(tweet_dict['created_at'])
+        tweet_dict['updated_at'] = str(tweet_dict['updated_at'])
+        tweet_dict['by']['user_id'] = str(tweet_dict["by"]['user_id'])
+        tweet_dict['by']['birth_date'] = str(tweet_dict["by"]['birth_date'])
+    for original_tweet in tweets_list:
+        if str(original_tweet['tweet_id']) == tweet_dict['tweet_id']:
+            tweet_index = tweets_list.index(original_tweet)
+            old_tweet = tweets_list.pop(tweet_index)
+            tweets_list.insert(tweet_index, tweet_dict)
+    with open('tweets.json', 'w', encoding='utf-8') as f:
+        f.write(str(tweets_list))
+    return old_tweet
