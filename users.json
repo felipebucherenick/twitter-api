@@ -2,25 +2,15 @@
   {
     "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa1",
     "email": "felipot@gmail.nz",
-    "first_name": "Felipe",
-    "last_name": "Bucherenick",
-    "birth_date": "2021-11-10",
-    "password": "holasoyfelipereg"
-  },
-  {
-    "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa2",
-    "email": "remix@gmail.nz",
-    "first_name": "Andrea",
-    "last_name": "Remix",
-    "birth_date": "2021-11-10",
-    "password": "holasoyremix"
+    "first_name": "Felipepot",
+    "last_name": "Bucherenickfer",
+    "birth_date": "2021-11-26"
   },
   {
     "user_id": "3fa85f64-5717-4562-b3fc-2c963f66afa4",
-    "email": "jamaica@gmail.nz",
-    "first_name": "Ron",
-    "last_name": "Jamaica",
-    "birth_date": "2021-11-17",
-    "password": "todopasando"
+    "email": "nuevojamaica@gmail.nz",
+    "first_name": "Rony",
+    "last_name": "Jamaicano",
+    "birth_date": "2021-11-15"
   }
 ]

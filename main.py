@@ -18,7 +18,8 @@ from fastapi import Body
 
 app = FastAPI()
 
-# Models
+
+# Models ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 class UserBase(BaseModel):
@@ -72,9 +73,9 @@ class Tweet(BaseModel):
     by: User = Field(...)
 
 
-# Path Operations
+# Path Operations ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-# Users
+# USERS =====================================================================================
 
 # Register a user
 @app.post(
@@ -108,9 +109,8 @@ def signup(user: UserRegister = Body(...)):
         f.write(json.dumps(results))
         return user
 
+
 # Login a user
-
-
 @app.post(
     path="/login",
     response_model=User,
@@ -141,9 +141,8 @@ def login(user_login: UserLogin = Body(...)):
                 if user_login_dict['password'] == user['password']:
                     return user
 
+
 # Show all users
-
-
 @app.get(
     path="/users",
     response_model=List[User],
@@ -170,8 +169,6 @@ def show_all_users():
 
 
 # Show a user
-
-
 @app.get(
     path="/users/{user_id}",
     response_model=User,
@@ -202,8 +199,6 @@ def show_a_user(user_id: UUID = Field(...)):
 
 
 # Delete a user
-
-
 @app.delete(
     path="/users/{user_id}/delete",
     response_model=User,
@@ -238,9 +233,8 @@ def delete_a_user(user_id: UUID = Field(...)):
         f.write(str(users_list))
     return deleted_user
 
+
 # Update a user
-
-
 @app.put(
     path="/users/{user_id}/update",
     response_model=User,
@@ -248,13 +242,42 @@ def delete_a_user(user_id: UUID = Field(...)):
     summary="Update a User",
     tags=["Users"]
 )
-def update_a_user():
-    pass
+def update_a_user(user: User = Body(...)):
+    """
+    # Update a user
+    ## This path operation update a user in the app.  
+    ### Parameters:  
+       - #### Request Body:
+          - **user**: *User*  
+    ### Return a JSON with the original User info. and a second with the updated info with the next structure:  
+       - **user_id:** *UUID*  
+       - **email:** *EmailStr*  
+       - **first_name:** *str*  
+       - **last_name:** *str*  
+       - **birth_date:** *Optional[date]*      
+     """
+    with open('users.json', 'r', encoding='utf-8') as f:
+        results = json.loads(f.read())
+        users_list = list(results)
+        f.close()
+        user_dict = user.dict()
+        user_dict['user_id'] = str(user_dict['user_id'])
+        user_dict['email'] = str(user_dict['email'])
+        user_dict['birth_date'] = str(user_dict['birth_date'])
+    for original_user in users_list:
+        if str(original_user['user_id']) == user_dict['user_id']:
+            user_index = users_list.index(original_user)
+            old_user = users_list.pop(user_index)
+            users_list.insert(user_index, user_dict)
+    with open('users.json', 'w', encoding='utf-8') as f:
+        f.write(str(users_list))
+    return old_user
+
+    # TWEETS =================================================================================
+
+    # Show  all tweets
 
 
-# Tweets
-
-# Show  all tweets
 @app.get(
     path="/",
     response_model=List[Tweet],
@@ -281,8 +304,6 @@ def home():
 
 
 # Post a tweet
-
-
 @app.post(
     path="/post",
     response_model=Tweet,
@@ -317,9 +338,8 @@ def post(tweet: Tweet = Body(...)):
         f.write(json.dumps(results))
         return tweet
 
+
 # Show a tweet
-
-
 @app.get(
     path="/tweets/{tweet_id}",
     response_model=Tweet,
@@ -348,9 +368,8 @@ def show_a_tweet(tweet_id: UUID = Field(...)):
             if tweet['tweet_id'] == str(tweet_id):
                 return tweet
 
+
 # Delete a tweet
-
-
 @app.delete(
     path="/tweets/{tweet_id}/delete",
     response_model=Tweet,
@@ -387,8 +406,6 @@ def delete_a_tweet(tweet_id: UUID = Field(...)):
 
 
 # Update a tweet
-
-
 @app.put(
     path="/tweets/{tweet_id}/update",
     response_model=Tweet,
